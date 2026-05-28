@@ -1,0 +1,9 @@
+# Configuration constants for the proxy server.
+
+BUFFER_SIZE = 8192
+DEFAULT_PORT = 8888
+DEFAULT_CACHE_TTL = 300
+DEFAULT_MAX_CACHE = 200
+DEFAULT_MAX_WORKERS = 50
+VERSION = "HTTP-Proxy-Cache/1.0"
+HTTP_VERSION = "HTTP/1.1"
