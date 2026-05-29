@@ -9,40 +9,64 @@ DASHBOARD_HTML = r'''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>&#72;&#84;&#84;&#80; &#20195;&#29702;&#32531;&#23384;&#26381;&#21153;&#22120;</title>
+<title>HTTP 代理缓存服务器</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f7f7f4;color:#1f2328;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.top{height:56px;padding:0 28px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:700}.meta{color:#666;font-size:13px}.wrap{max-width:1200px;margin:0 auto;padding:24px}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card,.panel{background:#fff;border:1px solid #ddd;border-radius:8px}.card{padding:16px}.label{font-size:12px;color:#666}.value{font-size:26px;font-weight:700;margin-top:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.panel{margin-top:16px;overflow:hidden}.head{padding:12px 14px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center}.body{padding:14px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.input{height:34px;padding:0 10px;border:1px solid #ccc;border-radius:6px}.btn{height:34px;padding:0 12px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer}.btn:hover{background:#f1f1ed}.btn.primary{background:#2563eb;color:#fff;border-color:#2563eb}.btn.red{background:#dc2626;color:#fff;border-color:#dc2626}.btn.green{background:#059669;color:#fff;border-color:#059669}.btn.active{border-color:#2563eb;color:#2563eb;background:#eff6ff}table{width:100%;border-collapse:collapse}td,th{padding:8px 10px;border-bottom:1px solid #e5e5e5;text-align:left;font-size:13px}th{color:#666}.empty{color:#777}.url{display:block;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.log{background:#111827;color:#d1d5db;border-radius:6px;padding:12px;font:12px/1.6 Consolas,monospace;max-height:300px;overflow:auto}@media(max-width:900px){.stats,.grid2{grid-template-columns:1fr}.meta{display:none}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:#2d3748}
+.top{height:64px;padding:0 32px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:100}.brand{font-weight:700;font-size:18px;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.meta{color:#718096;font-size:13px}.meta b{color:#4a5568;font-weight:600}
+.wrap{max-width:1400px;margin:0 auto;padding:28px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative;overflow:hidden}.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#667eea,#764ba2);opacity:0;transition:opacity 0.3s}.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.12)}.card:hover::before{opacity:1}.label{font-size:13px;color:#718096;font-weight:500;margin-bottom:8px}.value{font-size:28px;font-weight:700;color:#1a202c;line-height:1}.cache-size{font-size:12px;color:#a0aec0;margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.08);overflow:hidden;transition:all 0.3s;margin-bottom:16px}.panel:last-child{margin-bottom:0}.panel:hover{box-shadow:0 6px 16px rgba(0,0,0,0.1)}.head{padding:16px 20px;border-bottom:1px solid #edf2f7;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#f7fafc,#edf2f7)}.head b{font-size:15px;color:#2d3748;font-weight:600}.head span{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600}.body{padding:20px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.input{height:38px;padding:0 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;transition:all 0.3s;outline:none;flex:1;min-width:150px}.input:focus{border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,0.1)}.input::placeholder{color:#a0aec0}
+.btn{height:38px;padding:0 18px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s;outline:none;position:relative;overflow:hidden}.btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.3);transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}.btn:active::after{width:300px;height:300px}.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}.btn.primary:hover{box-shadow:0 4px 12px rgba(102,126,234,0.4)}
+.btn.red{background:linear-gradient(135deg,#f56565,#e53e3e);color:#fff}.btn.red:hover{box-shadow:0 4px 12px rgba(245,101,101,0.4)}
+.btn.green{background:linear-gradient(135deg,#48bb78,#38a169);color:#fff}.btn.green:hover{box-shadow:0 4px 12px rgba(72,187,120,0.4)}
+.btn.active{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;box-shadow:0 4px 12px rgba(102,126,234,0.3)}
+.btn.secondary{background:#edf2f7;color:#4a5568}.btn.secondary:hover{background:#e2e8f0}
+table{width:100%;border-collapse:collapse}td,th{padding:12px 16px;border-bottom:1px solid #edf2f7;text-align:left;font-size:13px}th{color:#718096;font-weight:600;background:#f7fafc}tr:hover{background:#f7fafc;transition:background 0.2s}.empty{color:#a0aec0;font-style:italic}.url{display:block;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4a5568;font-weight:500}
+.log{background:linear-gradient(135deg,#1a202c,#2d3748);color:#e2e8f0;border-radius:8px;padding:16px;font:13px/1.7 'Consolas','Monaco','Courier New',monospace;max-height:320px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#4a5568 #1a202c}.log::-webkit-scrollbar{width:8px}.log::-webkit-scrollbar-track{background:#1a202c;border-radius:4px}.log::-webkit-scrollbar-thumb{background:#4a5568;border-radius:4px}.log::-webkit-scrollbar-thumb:hover{background:#667eea}.log div{padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.05)}.log div:last-child{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}.badge.hit{background:#c6f6d5;color:#22543d}.badge.miss{background:#fed7d7;color:#742a2a}.badge.block{background:#fed7d7;color:#742a2a}.badge.error{background:#fed7d7;color:#742a2a}
+.refresh-indicator{font-size:11px;color:#a0aec0;font-weight:500}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.panel,.card{animation:fadeIn 0.5s ease-out}
+@media(max-width:900px){.stats,.grid2{grid-template-columns:1fr}.meta{display:none}.wrap{padding:16px}}
 </style>
 </head>
 <body>
-<div class="top"><div class="brand">&#72;&#84;&#84;&#80; &#20195;&#29702;&#32531;&#23384;&#26381;&#21153;&#22120;</div><div class="meta">&#31471;&#21475; <b id="proxyPort">--</b> &nbsp; &#36816;&#34892;&#26102;&#38388; <b id="uptime">--</b></div></div>
+<div class="top">
+  <div class="brand">🚀 HTTP 代理缓存服务器</div>
+  <div class="meta">端口 <b id="proxyPort">--</b> &nbsp;|&nbsp; 运行时间 <b id="uptime">--</b></div>
+</div>
 <div class="wrap">
   <div class="stats">
-    <div class="card"><div class="label">&#24635;&#35831;&#27714;&#25968;</div><div class="value" id="totalRequests">0</div></div>
-    <div class="card"><div class="label">&#32531;&#23384;&#21629;&#20013;&#29575;</div><div class="value" id="hitRate">0%</div></div>
-    <div class="card"><div class="label">&#32531;&#23384;&#26465;&#30446;</div><div class="value" id="cacheEntries">0</div><div class="label" id="cacheSize"></div></div>
-    <div class="card"><div class="label">&#24050;&#25318;&#25130;</div><div class="value" id="blockedRequests">0</div></div>
-    <div class="card"><div class="label">&#35775;&#38382;&#25511;&#21046;</div><div class="value" id="acMode">&#20851;&#38381;</div></div>
+    <div class="card"><div class="label">📊 总请求数</div><div class="value" id="totalRequests">0</div></div>
+    <div class="card"><div class="label">🎯 缓存命中率</div><div class="value" id="hitRate">0%</div></div>
+    <div class="card"><div class="label">💾 缓存条目</div><div class="value" id="cacheEntries">0</div><div class="cache-size" id="cacheSize"></div></div>
+    <div class="card"><div class="label">🚫 已拦截</div><div class="value" id="blockedRequests">0</div></div>
+    <div class="card"><div class="label">🔐 访问控制</div><div class="value" id="acMode" style="font-size:20px">关闭</div></div>
   </div>
 
   <div class="grid2">
-    <div class="panel"><div class="head"><b>&#40657;&#21517;&#21333;</b><span id="blCount">0</span></div><div class="body"><div class="row"><input class="input" id="blInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24"><button class="btn red" onclick="addB()">&#28155;&#21152;</button></div><table><tbody id="blacklistTable"><tr><td class="empty">&#26242;&#26080;&#26465;&#30446;</td></tr></tbody></table></div></div>
-    <div class="panel"><div class="head"><b>&#30333;&#21517;&#21333;</b><span id="wlCount">0</span></div><div class="body"><div class="row"><input class="input" id="wlInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24"><button class="btn green" onclick="addW()">&#28155;&#21152;</button></div><table><tbody id="whitelistTable"><tr><td class="empty">&#26242;&#26080;&#26465;&#30446;</td></tr></tbody></table></div></div>
+    <div class="panel"><div class="head"><b>🚫 黑名单</b><span id="blCount">0</span></div><div class="body"><div class="row"><input class="input" id="blInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24"><button class="btn red" onclick="addB()"> + 添加</button></div><table style="margin-top:16px"><tbody id="blacklistTable"><tr><td class="empty">暂无条目</td></tr></tbody></table></div></div>
+    <div class="panel"><div class="head"><b>✅ 白名单</b><span id="wlCount">0</span></div><div class="body"><div class="row"><input class="input" id="wlInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24"><button class="btn green" onclick="addW()"> + 添加</button></div><table style="margin-top:16px"><tbody id="whitelistTable"><tr><td class="empty">暂无条目</td></tr></tbody></table></div></div>
   </div>
 
-  <div class="panel"><div class="head"><b>&#35775;&#38382;&#25511;&#21046;&#27169;&#24335;</b></div><div class="body row"><button class="btn" id="btnModeOff" onclick="setMode('off')">&#20840;&#37096;&#20801;&#35768;</button><button class="btn" id="btnModeBlacklist" onclick="setMode('blacklist')">&#40657;&#21517;&#21333;&#27169;&#24335;</button><button class="btn" id="btnModeWhitelist" onclick="setMode('whitelist')">&#30333;&#21517;&#21333;&#27169;&#24335;</button><button class="btn" onclick="clearCache()">&#28165;&#31354;&#32531;&#23384;</button></div></div>
+  <div class="panel"><div class="head"><b>🔒 访问控制模式</b></div><div class="body row"><button class="btn secondary" id="btnModeOff" onclick="setMode('off')">✅ 全部允许</button><button class="btn secondary" id="btnModeBlacklist" onclick="setMode('blacklist')">🚫 黑名单模式</button><button class="btn secondary" id="btnModeWhitelist" onclick="setMode('whitelist')">✅ 白名单模式</button><button class="btn primary" onclick="clearCache()">🗑️ 清空缓存</button></div></div>
 
-  <div class="panel"><div class="head"><b>&#35831;&#27714;&#22836;&#20462;&#25913;</b></div><div class="body">
-    <div class="row"><input class="input" id="hKey" placeholder="Header"><input class="input" id="hVal" placeholder="Value"><button class="btn primary" onclick="addHeader()">&#28155;&#21152;&#35831;&#27714;&#22836;</button></div>
-    <div class="row" style="margin-top:8px"><input class="input" id="uaVal" style="min-width:360px" placeholder="User-Agent"><button class="btn" onclick="setUA()">&#35774;&#32622; User-Agent</button></div>
-    <table style="margin-top:10px"><thead><tr><th>&#31867;&#22411;</th><th>&#21517;&#31216;</th><th>&#20540;</th><th></th></tr></thead><tbody id="headersTable"><tr><td class="empty" colspan="4">&#26242;&#26080;&#35268;&#21017;</td></tr></tbody></table>
+  <div class="panel"><div class="head"><b> 请求头修改</b></div><div class="body">
+    <div class="row"><input class="input" id="hKey" placeholder="Header 名称"><input class="input" id="hVal" placeholder="Header 值"><button class="btn primary" onclick="addHeader()"> + 添加请求头</button></div>
+    <div class="row" style="margin-top:12px"><input class="input" id="uaVal" style="min-width:360px" placeholder="自定义 User-Agent"><button class="btn secondary" onclick="setUA()"> 设置 User-Agent</button></div>
+    <table style="margin-top:16px"><thead><tr><th>类型</th><th>名称</th><th>值</th><th>操作</th></tr></thead><tbody id="headersTable"><tr><td class="empty" colspan="4">暂无规则</td></tr></tbody></table>
   </div></div>
 
   <div class="grid2">
-    <div class="panel"><div class="head"><b>&#28909;&#38376; URL</b></div><table><tbody id="hotResources"><tr><td class="empty">&#26242;&#26080;&#25968;&#25454;</td></tr></tbody></table></div>
-    <div class="panel"><div class="head"><b>&#28909;&#38376;&#22495;&#21517;</b></div><table><tbody id="hotDomains"><tr><td class="empty">&#26242;&#26080;&#25968;&#25454;</td></tr></tbody></table></div>
+    <div class="panel"><div class="head"><b>🔥 热门 URL</b></div><div class="body" style="padding:0"><table><tbody id="hotResources"><tr><td class="empty">暂无数据</td></tr></tbody></table></div></div>
+    <div class="panel"><div class="head"><b>🌐 热门域名</b></div><div class="body" style="padding:0"><table><tbody id="hotDomains"><tr><td class="empty">暂无数据</td></tr></tbody></table></div></div>
   </div>
-  <div class="panel"><div class="head"><b>&#26368;&#36817;&#26085;&#24535;</b><span id="lastRefresh">--</span></div><div class="body"><div class="log" id="logViewer">&#31561;&#24453;&#27963;&#21160;...</div></div></div>
+  <div class="panel"><div class="head"><b>📋 最近日志</b><span class="refresh-indicator" id="lastRefresh">--</span></div><div class="body"><div class="log" id="logViewer">等待活动...</div></div></div>
 </div>
 <script>
 const A='/api/';
@@ -51,27 +75,27 @@ async function P(p,b={}){try{const r=await fetch(A+p,{method:'POST',headers:{'Co
 function Q(id,v){document.getElementById(id).textContent=v}
 function E(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function U(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;return `${h}h ${m}m ${sec}s`}
-function listTable(id,items,type){document.getElementById(id).innerHTML=items.length?items.map(i=>`<tr><td>${E(i)}</td><td style="text-align:right"><button class="btn" onclick="removeItem('${type}','${E(i)}')">&#31227;&#38500;</button></td></tr>`).join(''):'<tr><td class="empty">&#26242;&#26080;&#26465;&#30446;</td></tr>'}
+function listTable(id,items,type){document.getElementById(id).innerHTML=items.length?items.map(i=>`<tr><td>${E(i)}</td><td style="text-align:right"><button class="btn secondary" onclick="removeItem('${type}','${E(i)}')">🗑️ 移除</button></td></tr>`).join(''):'<tr><td class="empty">暂无条目</td></tr>'}
 async function addB(){const i=document.getElementById('blInput');const d=i.value.trim();if(!d)return;await P('blacklist/add',{domain:d});i.value='';refresh()}
 async function addW(){const i=document.getElementById('wlInput');const d=i.value.trim();if(!d)return;await P('whitelist/add',{domain:d});i.value='';refresh()}
 async function removeItem(t,d){await P(t+'/del',{domain:d});refresh()}
 async function setMode(m){await P('mode',{mode:m});refresh()}
-async function clearCache(){if(confirm('\u786e\u8ba4\u6e05\u7a7a\u6240\u6709\u7f13\u5b58\uff1f')){await P('cache/clear');refresh()}}
+async function clearCache(){if(confirm('确认清空所有缓存？')){await P('cache/clear');refresh()}}
 async function addHeader(){const k=document.getElementById('hKey'),v=document.getElementById('hVal');if(!k.value.trim())return;await P('headers/add',{key:k.value.trim(),value:v.value});k.value='';v.value='';refresh()}
 async function delHeader(k){await P('headers/del',{key:k});refresh()}
 async function setUA(){const v=document.getElementById('uaVal').value.trim();if(!v)return;await P('headers/ua',{value:v});refresh()}
-function renderHeaders(H){let rows=[];Object.entries(H.add||{}).forEach(([k,v])=>rows.push(`<tr><td>&#28155;&#21152;</td><td>${E(k)}</td><td>${E(v)}</td><td><button class="btn" onclick="delHeader('${E(k)}')">&#31227;&#38500;</button></td></tr>`));Object.entries(H.override||{}).forEach(([k,v])=>rows.push(`<tr><td>&#35206;&#30422;</td><td>${E(k)}</td><td>${E(v)}</td><td></td></tr>`));(H.remove||[]).forEach(k=>rows.push(`<tr><td>&#36807;&#28388;</td><td>${E(k)}</td><td></td><td></td></tr>`));document.getElementById('headersTable').innerHTML=rows.join('')||'<tr><td class="empty" colspan="4">&#26242;&#26080;&#35268;&#21017;</td></tr>'}
+function renderHeaders(H){let rows=[];Object.entries(H.add||{}).forEach(([k,v])=>rows.push(`<tr><td><span class="badge hit"> + 添加</span></td><td>${E(k)}</td><td>${E(v)}</td><td><button class="btn secondary" onclick="delHeader('${E(k)}')">🗑️ 移除</button></td></tr>`));Object.entries(H.override||{}).forEach(([k,v])=>rows.push(`<tr><td><span class="badge" style="background:#bee3f8;color:#2a4365">覆盖</span></td><td>${E(k)}</td><td>${E(v)}</td><td></td></tr>`));(H.remove||[]).forEach(k=>rows.push(`<tr><td><span class="badge" style="background:#fed7d7;color:#742a2a">过滤</span></td><td>${E(k)}</td><td></td><td></td></tr>`));document.getElementById('headersTable').innerHTML=rows.join('')||'<tr><td class="empty" colspan="4">暂无规则</td></tr>'}
 async function refresh(){
   const[S,C,BL,WL,CF,H,L,HD]=await Promise.all([J('stats'),J('cache'),J('blacklist'),J('whitelist'),J('config'),J('hot'),J('logs?n=40'),J('headers')]);
   if(S){Q('totalRequests',S.total.toLocaleString());Q('hitRate',S.hit_rate.toFixed(1)+'%');Q('blockedRequests',S.blocked);Q('uptime',U(S.uptime));Q('proxyPort',S.port||'--')}
   if(C){Q('cacheEntries',C.entries+' / '+C.max_entries);Q('cacheSize',(C.total_size/1024).toFixed(1)+' KB')}
-  if(CF){const m=CF.mode;Q('acMode',m==='off'?'\u5168\u90e8\u5141\u8bb8':m==='blacklist'?'\u9ed1\u540d\u5355':'\u767d\u540d\u5355');['Off','Blacklist','Whitelist'].forEach(x=>document.getElementById('btnMode'+x).className='btn');document.getElementById('btnMode'+(m==='off'?'Off':m==='blacklist'?'Blacklist':'Whitelist')).className='btn active'}
+  if(CF){const m=CF.mode;Q('acMode',m==='off'?'✅ 全部允许':m==='blacklist'?'🚫 黑名单':'✅ 白名单');['Off','Blacklist','Whitelist'].forEach(x=>document.getElementById('btnMode'+x).className='btn secondary');document.getElementById('btnMode'+(m==='off'?'Off':m==='blacklist'?'Blacklist':'Whitelist')).className='btn active'}
   if(BL){listTable('blacklistTable',BL.items,'blacklist');Q('blCount',BL.items.length)}
   if(WL){listTable('whitelistTable',WL.items,'whitelist');Q('wlCount',WL.items.length)}
   if(HD)renderHeaders(HD);
-  if(H){document.getElementById('hotResources').innerHTML=H.hot_urls.length?H.hot_urls.map(([u,c],i)=>`<tr><td>${i+1}</td><td><span class="url" title="${E(u)}">${E(u)}</span></td><td>${c}</td></tr>`).join(''):'<tr><td class="empty">&#26242;&#26080;&#25968;&#25454;</td></tr>';document.getElementById('hotDomains').innerHTML=H.hot_domains.length?H.hot_domains.map(([d,c],i)=>`<tr><td>${i+1}</td><td>${E(d)}</td><td>${c}</td></tr>`).join(''):'<tr><td class="empty">&#26242;&#26080;&#25968;&#25454;</td></tr>'}
-  if(L&&L.lines){document.getElementById('logViewer').innerHTML=L.lines.map(l=>`<div>${E(l.text)}</div>`).join('')||'\u7b49\u5f85\u6d3b\u52a8...'}
-  Q('lastRefresh',new Date().toLocaleTimeString());
+  if(H){document.getElementById('hotResources').innerHTML=H.hot_urls.length?H.hot_urls.map(([u,c],i)=>`<tr><td style="width:40px;color:#a0aec0;font-weight:600">${i+1}</td><td><span class="url" title="${E(u)}">${E(u)}</span></td><td style="width:80px;text-align:center"><span class="badge hit">${c}</span></td></tr>`).join(''):'<tr><td class="empty">暂无数据</td></tr>';document.getElementById('hotDomains').innerHTML=H.hot_domains.length?H.hot_domains.map(([d,c],i)=>`<tr><td style="width:40px;color:#a0aec0;font-weight:600">${i+1}</td><td>${E(d)}</td><td style="width:80px;text-align:center"><span class="badge hit">${c}</span></td></tr>`).join(''):'<tr><td class="empty">暂无数据</td></tr>'}
+  if(L&&L.lines){document.getElementById('logViewer').innerHTML=L.lines.map(l=>{let cls='';if(l.level==='cache')cls='color:#68d391';if(l.level==='block')cls='color:#fc8181';if(l.level==='error')cls='color:#fc8181';return `<div style="${cls}">${E(l.text)}</div>`}).join('')||'等待活动...'}
+  Q('lastRefresh','最后更新: '+new Date().toLocaleTimeString());
 }
 refresh();setInterval(refresh,2000);
 </script>
