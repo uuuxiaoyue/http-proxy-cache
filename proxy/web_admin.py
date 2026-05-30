@@ -76,8 +76,8 @@ body{
   box-shadow:0 0 8px rgba(5,150,105,.4);
 }
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.9)}}
-.container{max-width:1320px;margin:0 auto;padding:32px}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:32px}
+.container{max-width:1240px;margin:0 auto;padding:20px 24px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:20px}
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){.stats{grid-template-columns:1fr 1fr}}
 .stat-card{
@@ -114,7 +114,7 @@ body{
 .stat-value.amber{color:var(--amber)}
 .stat-value.accent{color:var(--accent)}
 .stat-sub{font-size:12px;color:var(--text3);margin-top:2px;font-weight:500}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 @media(max-width:850px){.row2{grid-template-columns:1fr}}
 .panel{
   background:var(--surface);border-radius:var(--radius);
@@ -123,24 +123,24 @@ body{
 }
 .panel:hover{box-shadow:var(--shadow-md)}
 .panel-header{
-  padding:18px 24px;border-bottom:1px solid var(--border);
+  padding:14px 20px;border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
   background:var(--surface);
 }
 .panel-header h2{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);display:flex;align-items:center;gap:8px}
-.panel-body{padding:20px 24px}
+.panel-body{padding:16px 20px}
 table{width:100%;border-collapse:collapse}
 thead th{
   text-align:left;padding:10px 12px 10px 0;font-size:11px;font-weight:600;
   color:var(--text3);text-transform:uppercase;letter-spacing:.04em;
   border-bottom:2px solid var(--border);
 }
-tbody td{padding:12px 12px 12px 0;font-size:13px;border-bottom:1px solid rgba(232,227,216,.5)}
+tbody td{padding:10px 12px 10px 0;font-size:13px;border-bottom:1px solid rgba(232,227,216,.5)}
 tbody tr:last-child td{border-bottom:none}
 tbody tr{transition:all .2s}
 tbody tr:hover{background:var(--accent-light)}
 .td-url{max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;color:var(--text);font-weight:500}
-.bar-wrap{display:flex;align-items:center;gap:8px;min-width:80px}
+.bar-wrap{display:flex;align-items:center;gap:6px;min-width:80px}
 .bar-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--amber));border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .btn{
@@ -173,7 +173,7 @@ tbody tr:hover{background:var(--accent-light)}
 }
 .input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(217,121,4,.1),0 2px 8px rgba(217,121,4,.15);transform:translateY(-1px)}
 .input::placeholder{color:var(--text3)}
-.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .log-viewer{
   background:linear-gradient(180deg,#1e1e2e 0%,#1a1a2e 100%);
   border-radius:var(--radius-sm);padding:16px 18px;
@@ -308,7 +308,7 @@ tbody tr:hover{background:var(--accent-light)}
         <span class="badge badge-red" id="blCount">0</span>
       </div>
       <div class="panel-body">
-        <div class="flex" style="margin-bottom:16px">
+        <div class="flex" style="margin-bottom:12px">
           <input class="input" id="blInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24" style="flex:1" onkeydown="if(event.key==='Enter')addB()">
           <button class="btn btn-danger" onclick="addB()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -339,7 +339,7 @@ tbody tr:hover{background:var(--accent-light)}
     </div>
   </div>
 
-  <div class="panel" style="margin-bottom:32px">
+  <div class="panel" style="margin-bottom:20px">
     <div class="panel-header">
       <h2>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -360,7 +360,7 @@ tbody tr:hover{background:var(--accent-light)}
     </div>
   </div>
 
-  <div class="panel" style="margin-bottom:32px">
+  <div class="panel" style="margin-bottom:20px">
     <div class="panel-header">
       <h2>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -368,7 +368,7 @@ tbody tr:hover{background:var(--accent-light)}
       </h2>
     </div>
     <div class="panel-body">
-      <div class="flex" style="margin-bottom:12px">
+      <div class="flex" style="margin-bottom:10px">
         <input class="input" id="hKey" placeholder="Header 名称" style="width:200px !important;">
         <input class="input" id="hVal" placeholder="Header 值" style="width:200px !important;">
         <button class="btn btn-primary" onclick="addHeader()">
@@ -376,7 +376,7 @@ tbody tr:hover{background:var(--accent-light)}
           添加请求头
         </button>
       </div>
-      <div class="flex" style="margin-bottom:16px">
+      <div class="flex" style="margin-bottom:12px">
         <input class="input" id="uaVal" placeholder="自定义 User-Agent" style="width:400px !important;">
         <button class="btn btn-outline" onclick="setUA()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
