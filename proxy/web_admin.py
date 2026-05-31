@@ -230,18 +230,16 @@ tbody tr:hover{background:var(--accent-light)}
 <body>
 <div class="header">
   <div class="header-brand">
-    <div class="header-logo">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    </div>
+    <div class="header-logo">⚡</div>
     <h1>HTTP 代理缓存服务器</h1>
   </div>
   <div class="header-meta">
     <span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+
       端口 <b id="proxyPort">--</b>
     </span>
     <span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
       运行时间 <b id="uptime">--</b>
     </span>
     <span><span class="status-dot"></span>运行中</span>
@@ -302,16 +300,15 @@ tbody tr:hover{background:var(--accent-light)}
     <div class="panel">
       <div class="panel-header">
         <h2>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--red)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+
           黑名单
         </h2>
-        <span class="badge badge-red" id="blCount">0</span>
-      </div>
+        </div>
       <div class="panel-body">
         <div class="flex" style="margin-bottom:12px">
           <input class="input" id="blInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24" style="flex:1" onkeydown="if(event.key==='Enter')addB()">
           <button class="btn btn-danger" onclick="addB()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+
             拦截
           </button>
         </div>
@@ -321,16 +318,15 @@ tbody tr:hover{background:var(--accent-light)}
     <div class="panel">
       <div class="panel-header">
         <h2>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+
           白名单
         </h2>
-        <span class="badge badge-green" id="wlCount">0</span>
-      </div>
+        </div>
       <div class="panel-body">
         <div class="flex" style="margin-bottom:16px">
           <input class="input" id="wlInput" placeholder="example.com / 1.2.3.4 / 1.2.3.0/24" style="flex:1" onkeydown="if(event.key==='Enter')addW()">
           <button class="btn btn-success" onclick="addW()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+
             允许
           </button>
         </div>
@@ -342,7 +338,7 @@ tbody tr:hover{background:var(--accent-light)}
   <div class="panel" style="margin-bottom:20px">
     <div class="panel-header">
       <h2>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+
         访问控制模式
       </h2>
     </div>
@@ -353,7 +349,7 @@ tbody tr:hover{background:var(--accent-light)}
         <button class="btn btn-outline" id="btnModeWhitelist" onclick="setMode('whitelist')">白名单模式</button>
         <span style="flex:1"></span>
         <button class="btn btn-outline" onclick="clearCache()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+
           清空缓存
         </button>
       </div>
@@ -363,7 +359,7 @@ tbody tr:hover{background:var(--accent-light)}
   <div class="panel" style="margin-bottom:20px">
     <div class="panel-header">
       <h2>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+
         请求头修改
       </h2>
     </div>
@@ -372,14 +368,14 @@ tbody tr:hover{background:var(--accent-light)}
         <input class="input" id="hKey" placeholder="Header 名称" style="width:200px !important;">
         <input class="input" id="hVal" placeholder="Header 值" style="width:200px !important;">
         <button class="btn btn-primary" onclick="addHeader()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+
           添加请求头
         </button>
       </div>
       <div class="flex" style="margin-bottom:12px">
         <input class="input" id="uaVal" placeholder="自定义 User-Agent" style="width:400px !important;">
         <button class="btn btn-outline" onclick="setUA()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+
           设置 User-Agent
         </button>
       </div>
@@ -392,7 +388,7 @@ tbody tr:hover{background:var(--accent-light)}
     <div class="panel">
       <div class="panel-header">
         <h2>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+
           热门 URL
         </h2>
       </div>
@@ -404,7 +400,7 @@ tbody tr:hover{background:var(--accent-light)}
     <div class="panel">
       <div class="panel-header">
         <h2>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green)"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+
           热门域名
         </h2>
       </div>
@@ -418,7 +414,7 @@ tbody tr:hover{background:var(--accent-light)}
   <div class="panel">
     <div class="panel-header">
       <h2>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+
         实时日志
       </h2>
       <span class="refresh-indicator" id="lastRefresh">最后更新: --</span>
@@ -483,7 +479,6 @@ refresh();setInterval(refresh,2000);
 </script>
 </body>
 </html>'''
-
 
 class WebAdminHandler(BaseHTTPRequestHandler):
     proxy_server = None
@@ -642,7 +637,6 @@ class WebAdminHandler(BaseHTTPRequestHandler):
             return result
         except Exception:
             return []
-
 
 class WebAdmin:
     def __init__(self, proxy_server, host='0.0.0.0', port=8890):
